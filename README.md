@@ -2,6 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+create project 
+> npx create-next-app@latest --ts nextjs-amplify
+
 First, run the development server:
 
 ```bash
