@@ -3,15 +3,15 @@ import { NextPage } from "next";
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-const name = "Shin Code";
+const name = "Simple Blog";
+export const siteTitle = "Next.js blog";
 
-type LayoutProps = {
-    message: string
-    submessage: string
-}
+// type LayoutProps = {
+//     children?: React.ReactElement;
+// }
 
-const Layout: NextPage<LayoutProps> = (props) => {
-    const {message, submessage} = props;
+const Layout = (props: any) => {
+    const {children} = props;
     
     return (
         <div className={styles.container}>
@@ -22,8 +22,7 @@ const Layout: NextPage<LayoutProps> = (props) => {
                 <img src="/run_gopher.ico" width={200} className={utilStyles.borderCircle}></img>
                 <h1 className={utilStyles.heading2Xl}>{name}</h1>
             </header>
-            <main>{message}</main>
-            <h6>{submessage}</h6>
+            <main>{children}</main>
         </div>
     )
 }
