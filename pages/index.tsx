@@ -6,8 +6,35 @@ import Layout from '../components/Layout'
 
 import Link from 'next/link'
 import utilStyle from "../styles/utils.module.css";
+// export defaultの場合は{}いらず、export時は{a, b}で選択する
+import {getPostsData, getAllPostsIds} from '../lib/post';
 
-const Home: NextPage = () => {
+// SSG(プリレンダリング)の場合
+// 一度だけ外部からデータを取得する
+export async function getStaticProps(){
+  const allPostsData = getPostsData();
+  console.log(allPostsData);
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
+
+// type Props = {
+//   id: string,
+//   title: string,
+//   date: string,
+//   thumbnail: string,
+// }[];
+
+type Props = {
+  id: string;
+}[];
+
+
+const Home: NextPage<Props> = (props) => {
+  const {allPostsData} = props;
   return (
     <Layout>
       <section className={utilStyle.headingMd}>
@@ -20,61 +47,21 @@ const Home: NextPage = () => {
         <h2>エンジニアのブログ</h2>
       
       <div className={styles.grid}>
-        <article>
-          <Link href="/">
-            <img src="/article/making_keyboard.jpg"
+        {allPostsData.map(({id, title, date, thumbnail}) =>(
+          <article key={id}>
+          <Link href={`/posts/${id}`}>
+            <img src={`${thumbnail}`}
             className={styles.thumbnailImage}></img>
           </Link>
-          <Link href="/">
+          <Link href={`/posts/${id}`}>
             <a className={utilStyle.boldText}>
-              初の自作キーボードを作成しました
+              {title}
             </a>
           </Link>
           <br/>
-          <small className={utilStyle.lightText}>2022/7/27</small>
+          <small className={utilStyle.lightText}>{date}</small>
         </article>
-
-        <article>
-          <Link href="/">
-            <img src="/article/image_adnet.png"
-            className={styles.thumbnailImage}></img>
-          </Link>
-          <Link href="/">
-          <a className={utilStyle.boldText}>
-            Advanced Networking - Specialty に合格しました
-          </a>
-          </Link>
-          <br/>
-          <small className={utilStyle.lightText}>2022/7/10</small>
-        </article>
-
-        <article>
-          <Link href="/">
-            <img src="/article/image_sec.png"
-            className={styles.thumbnailImage}></img>
-          </Link>
-          <Link href="/">
-          <a className={utilStyle.boldText}>
-            Security - Specialty に合格しました
-          </a>
-          </Link>
-          <br/>
-          <small className={utilStyle.lightText}>2022/6/18</small>
-        </article>
-
-        <article>
-          <Link href="/">
-            <img src="/article/image_sap.png"
-            className={styles.thumbnailImage}></img>
-          </Link>
-          <Link href="/">
-          <a className={utilStyle.boldText}>
-            Solutions Architect Professional に合格しました
-          </a>
-          </Link>
-          <br/>
-          <small className={utilStyle.lightText}>2022/5/28</small>
-        </article>
+        ))}
       </div>
 
 

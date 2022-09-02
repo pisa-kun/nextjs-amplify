@@ -3,8 +3,8 @@ import { NextPage } from "next";
 import styles from "./layout.module.css";
 import utilStyles from "../styles/utils.module.css";
 
-const name = "Simple Blog";
-export const siteTitle = "Next.js blog";
+const name = "ぴさくんのソフト開発ぶろぐ(仮)";
+export const siteTitle = "pisa's developing software(仮)";
 
 // type LayoutProps = {
 //     children?: React.ReactElement;
@@ -17,6 +17,7 @@ const Layout = (props: any) => {
         <div className={styles.container}>
             <Head>
                 <link rel="icon" href="/climax.ico"></link>
+                <title>{siteTitle}</title>
             </Head>
             <header className={styles.header}>
                 <img src="/run_gopher.ico" width={200} className={utilStyles.borderCircle}></img>
