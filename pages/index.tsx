@@ -8,6 +8,7 @@ import Link from 'next/link'
 import utilStyle from "../styles/utils.module.css";
 // export defaultの場合は{}いらず、export時は{a, b}で選択する
 import {getPostsData, getAllPostsIds} from '../lib/post';
+import { siteTitle } from '../components/Layout';
 
 // SSG(プリレンダリング)の場合
 // 一度だけ外部からデータを取得する
@@ -41,7 +42,10 @@ const Home: NextPage<AllPostsData> = (props: AllPostsData) => {
   const {allPostsData} = props;
 
   return (
-    <Layout>
+    <Layout home>
+      <Head>
+        <title>{siteTitle}</title>
+      </Head>
       <section className={utilStyle.headingMd}>
         <p>
           駆け出し中のエンジニアです/データ設計してます/AWS勉強中です
