@@ -20,7 +20,7 @@ const Layout = (props: any) => {
                 <title>{siteTitle}</title>
             </Head>
             <header className={styles.header}>
-                <img src="/run_gopher.ico" width={200} className={utilStyles.borderCircle}></img>
+                <img src="/run_gopher.ico" width={200} className={utilStyles.borderCircle} alt=''></img>
                 <h1 className={utilStyles.heading2Xl}>{name}</h1>
             </header>
             <main>{children}</main>

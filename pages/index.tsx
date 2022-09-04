@@ -21,20 +21,25 @@ export async function getStaticProps(){
   };
 }
 
+type Props = {
+  id: string,
+  title: string,
+  date: string,
+  thumbnail: string,
+};
+
 // type Props = {
-//   id: string,
-//   title: string,
-//   date: string,
-//   thumbnail: string,
+//   id: string;
 // }[];
 
-type Props = {
-  id: string;
-}[];
+type AllPostsData = {
+  allPostsData: Props[]
+};
 
 
-const Home: NextPage<Props> = (props) => {
+const Home: NextPage<AllPostsData> = (props: AllPostsData) => {
   const {allPostsData} = props;
+
   return (
     <Layout>
       <section className={utilStyle.headingMd}>
@@ -50,7 +55,7 @@ const Home: NextPage<Props> = (props) => {
         {allPostsData.map(({id, title, date, thumbnail}) =>(
           <article key={id}>
           <Link href={`/posts/${id}`}>
-            <img src={`${thumbnail}`}
+            <img src={`${thumbnail}`} alt=''
             className={styles.thumbnailImage}></img>
           </Link>
           <Link href={`/posts/${id}`}>
