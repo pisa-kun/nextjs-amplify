@@ -56,20 +56,22 @@ const Home: NextPage<AllPostsData> = (props: AllPostsData) => {
         <h2>エンジニアのブログ</h2>
       
       <div className={styles.grid}>
-        {allPostsData.map(({id, title, date, thumbnail}) =>(
+        {allPostsData.sort((first, second) => 
+        (first.date > second.date) ? -1 : 1)
+        .map(({id, title, date, thumbnail}) =>(
           <article key={id}>
-          <Link href={`/posts/${id}`}>
-            <img src={`${thumbnail}`} alt=''
-            className={styles.thumbnailImage}></img>
-          </Link>
-          <Link href={`/posts/${id}`}>
-            <a className={utilStyle.boldText}>
-              {title}
-            </a>
-          </Link>
-          <br/>
-          <small className={utilStyle.lightText}>{date}</small>
-        </article>
+            <Link href={`/posts/${id}`}>
+              <img src={`${thumbnail}`} alt=''
+              className={styles.thumbnailImage}></img>
+            </Link>
+            <Link href={`/posts/${id}`}>
+              <a className={utilStyle.boldText}>
+                {title}
+              </a>
+            </Link>
+            <br/>
+            <small className={utilStyle.lightText}>{date}</small>
+          </article>      
         ))}
       </div>
 
